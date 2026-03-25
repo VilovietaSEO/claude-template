@@ -817,9 +817,6 @@ PostToolUse validators automatically enforce code quality:
 
 ## Output Styles Collection
 
-> **Watch the walkthrough:** See these features in action at [https://youtu.be/mJhsWrEv-Go](https://youtu.be/mJhsWrEv-Go)
-
-<img src="images/genui.png" alt="GenUI Output Style" style="max-width: 800px; width: 100%;" />
 
 This project includes a comprehensive collection of custom output styles (`.claude/output-styles/`) that transform how Claude Code communicates responses. See the [official documentation](https://docs.anthropic.com/en/docs/claude-code/output-styles) for complete details on how output styles work.
 
@@ -844,8 +841,6 @@ Output styles modify Claude's system prompt to change response formatting withou
 
 
 ## Custom Status Lines
-
-> **Watch the walkthrough:** See these features in action at [https://youtu.be/mJhsWrEv-Go](https://youtu.be/mJhsWrEv-Go)
 
 This project includes enhanced Claude Code status lines that display real-time conversation context. Status lines provide dynamic information at the bottom of your terminal during Claude Code sessions. See the [official documentation](https://docs.anthropic.com/en/docs/claude-code/statusline) for complete details.
 
@@ -923,10 +918,3 @@ Set your preferred status line in `.claude/settings.json`:
 
 
 
-## Master Agentic Coding
-
-> Prepare for the future of software engineering
-
-Learn tactical agentic coding patterns with [Tactical Agentic Coding](https://agenticengineer.com/tactical-agentic-coding?y=ssvhooks)
-
-Follow the [IndyDevDan YouTube channel](https://www.youtube.com/@indydevdan) to improve your agentic coding advantage.
