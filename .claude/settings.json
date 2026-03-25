@@ -1,185 +1,168 @@
 {
-    "permissions": {
-      "allow": [
-        "Bash",
-        "Edit",
-        "Write",
-        "Read",
-        "Glob",
-        "Grep",
-        "WebFetch",
-        "Skill",
-        "WebSearch",
-        "mcp__firecrawl-mcp__firecrawl_scrape",
-        "mcp__firecrawl-mcp__firecrawl_map",
-        "mcp__firecrawl-mcp__firecrawl_search",
-        "mcp__firecrawl-mcp__firecrawl_extract"
-      ],
-      "deny": []
-    },
-    "enableAllProjectMcpServers": true,
-    "hooks": {
-      "PreToolUse": [
-        {
-          "matcher": "",
-          "hooks": [
-           
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type PreToolUse --summarize",
-              "timeout": 10
-            }
-          ]
-        }
-      ],
-      "PostToolUse": [
-        {
-          "matcher": "",
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/opt/thorbit/app/thorbit-production/.claude/hooks-v2/post-tool-use/progress-tracker.sh",
-              "timeout": 10
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type PostToolUse --summarize",
-              "timeout": 10
-            }
-          ]
-        }
-      ],
-      "Notification": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/notification.py",
-              "timeout": 5
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type Notification --summarize",
-              "timeout": 10
-            }
-          ]
-        }
-      ],
-      "Stop": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/stop.py --chat",
-              "timeout": 10
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type Stop",
-              "timeout": 15
-            }
-          ]
-        }
-      ],
-      "SubagentStart": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/subagent_start.py",
-              "timeout": 5
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type SubagentStart",
-              "timeout": 10
-            }
-          ]
-        }
-      ],
-      "SubagentStop": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks-v2/eics/inject_validation_instruction.py",
-              "timeout": 10
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/subagent_stop.py --chat",
-              "timeout": 5
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type SubagentStop",
-              "timeout": 10
-            }
-          ]
-        }
-      ],
-      "PreCompact": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/pre_compact.py",
-              "timeout": 5
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type PreCompact",
-              "timeout": 10
-            }
-          ]
-        }
-      ],
-      "SessionStart": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type SessionStart",
-              "timeout": 10
-            }
-          ]
-        }
-      ],
-      "SessionEnd": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/session_end.py",
-              "timeout": 5
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/auto_resume.py",
-              "timeout": 5
-            },
-            {
-              "type": "command",
-              "command": "/usr/local/bin/uv run /opt/thorbit/app/thorbit-production/.claude/hooks/send_event.py --source-app thorbit-workflow --event-type SessionEnd",
-              "timeout": 10
-            }
-          ]
-        }
-      ]
-    },
-    "enabledPlugins": {
-      "pyright-lsp@claude-plugins-official": true,
-      "typescript-lsp@claude-plugins-official": true,
-      "code-review@claude-plugins-official": true,
-      "security-guidance@claude-plugins-official": true,
-      "agent-sdk-dev@claude-plugins-official": true,
-      "hookify@claude-plugins-official": true,
-      "feature-dev@claude-plugins-official": true,
-      "plugin-dev@claude-plugins-official": true
-    },
-    "alwaysThinkingEnabled": true
-   }
-   
-   
-   
-   
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(uv:*)",
+      "Bash(find:*)",
+      "Bash(mv:*)",
+      "Bash(grep:*)",
+      "Bash(npm:*)",
+      "Bash(ls:*)",
+      "Bash(cp:*)",
+      "Write",
+      "Edit",
+      "Bash(chmod:*)",
+      "Bash(touch:*)"
+    ],
+    "deny": []
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "uv run $CLAUDE_PROJECT_DIR/.claude/status_lines/status_line_v6.py",
+    "padding": 0
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/pre_tool_use.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/post_tool_use.py"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/notification.py --notify"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/stop.py --chat"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/subagent_stop.py --notify"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/user_prompt_submit.py --log-only --store-last-prompt --name-agent"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/pre_compact.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/session_start.py"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/session_end.py"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/permission_request.py --log-only"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/post_tool_use_failure.py"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/subagent_start.py"
+          }
+        ]
+      }
+    ],
+    "Setup": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run $CLAUDE_PROJECT_DIR/.claude/hooks/setup.py"
+          }
+        ]
+      }
+    ]
+  }
+}
